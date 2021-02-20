@@ -1,8 +1,10 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -31,8 +33,13 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == c.CarId);
+            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(carToDelete);
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAll()
@@ -40,14 +47,29 @@ namespace DataAccess.Concrete.InMemory
             return _cars;
         }
 
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetById(int carId)
         {
             return _cars.Where(c => c.CarId == c.CarId).ToList();
         }
 
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == c.CarId);
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             carToUpdate.CarId = car.CarId;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.BrandId = car.BrandId;
